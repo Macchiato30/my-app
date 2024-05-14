@@ -1,0 +1,9 @@
+.navbar-brand {
+    color: slateblue;
+    font-weight: 400;
+    font-family: fantasy;
+}
+.rounded-circle{
+    width:200px;
+    height:200px;
+}

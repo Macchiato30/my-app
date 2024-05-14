@@ -1,0 +1,35 @@
+body {
+    animation: transitionIn 0.75s;
+    background-image: linear-gradient(to right, pink, lavender);
+}
+
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
+
+p {
+    font-family: 'Apple Chanery', cursive;
+    color: slateblue;
+}
+
+h1 {
+    font-size: 50px;
+    font-family: fantasy;
+    color: slateblue;
+}
+
+.btn-primary {
+    background-color: slateblue;
+}
+
+.btn-success {
+    background-color: slateblue;
+}
