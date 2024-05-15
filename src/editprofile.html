@@ -63,24 +63,60 @@
               alt="..."
             />
           </div>
-          <div class="container-fluid text-center p-2">
-            <a href="editprofile.html"
-              ><button class="btn btn-primary" type="button">
-                Edit Profile
-              </button></a
-            >
+          <div class="container-fluid text-center">
+            <form>
+              <div class="mb-3">
+                <label for="formFile" class="form-label"
+                  >Upload Profile Picture</label
+                >
+                <input class="form-control" type="file" id="formFile" />
+              </div>
+            </form>
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">Service Name</h5>
-              <span>Mark Kenth Paran</span>
-              <p>P800 per Project</p>
-              <p class="card-text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus dignissimos voluptatibus nulla labore libero ratione
-                ab reprehenderit odit nemo beatae ipsa illum facilis ea itaque
-                et sequi, adipisci vitae nisi!
-              </p>
+              <form>
+                <div class="mb-3">
+                  <label for="servicename" class="form-label"
+                    >Service Name</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="1"
+                  ></textarea>
+                </div>
+                <p><b>Mark Kenth Paran</b></p>
+                <div class="mb-3">
+                  <label for="rate" class="form-label">Hourly / Rate</label>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="1"
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                  ></textarea>
+                </div>
+
+                <div class="text-center">
+                  <a href="profile.html"
+                    ><button type="button" class="btn btn-secondary btn-sm">
+                      Cancel
+                    </button></a
+                  >
+                  <button type="submit" class="btn btn-primary btn-sm">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
               <p class="card-text">
                 <small class="text-body-secondary"></small>
               </p>
