@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/css/master.css" />
     <link rel="stylesheet" href="/css/css/home.css" />
 
-    <script type="module" src="./js/system/home.js"></script>
+    <script type="module" src="./js/system/fav.js"></script>
   </head>
   <body>
     <nav class="navbar bg-body-tertiary fixed-top container-fluid bg">
@@ -52,40 +52,11 @@
     <!-- Notifications -->
     <div class="alert alert-danger d-none" role="alert"></div>
 
-    <div>
-      <div class="container">
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="assets/imgs/soldering.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Technician</h5>
-                <p>P350/hr</p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Last updated 3 mins ago</small
-                  >
-                </p>
-              </div>
-
-              <div class="col-6 card-body">
-                <a href="fav.html"
-                  ><button class="unstyled-button">
-                    <img src="assets/imgs/inbookmark.png" /></button
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Saved Services Section -->
+    <div class="container mt-5">
+      <h2>Saved Services</h2>
+      <div id="saved_services"></div>
     </div>
-
     <br /><br />
 
     <script src="./js/capacitor-welcome.js" type="module"></script>

@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/css/master.css" />
     <link rel="stylesheet" href="/css/css/home.css" />
 
+    <!-- JavaScript -->
     <script type="module" src="./js/system/home.js"></script>
   </head>
   <body>
+    <!-- Navbar -->
     <nav class="navbar bg-body-tertiary fixed-top container-fluid bg">
       <div class="col-10 container-fluid">
+        <!-- Search Form -->
         <form class="col d-flex" role="search">
           <input
             class="form-control me-2"
@@ -25,127 +29,193 @@
             <img src="assets/imgs/search.png" />
           </button>
         </form>
-        <a class="col-1 ps-2" href="#" id="btn_signout"
-          ><button class="unstyled-button">
-            <img src="assets/imgs/signout.png" /></button
-        ></a>
+        <!-- Sign Out Button -->
+        <a class="col-1 ps-2" href="#" id="btn_signout">
+          <button class="unstyled-button">
+            <img src="assets/imgs/signout.png" />
+          </button>
+        </a>
       </div>
+      <!-- Navigation Links -->
       <div class="col-10 container-fluid pt-1">
-        <a href="home.html"
-          ><button class="unstyled-button">
-            <img src="assets/imgs/inhome.png" /></button
-        ></a>
-        <a href="profile.html"
-          ><button class="unstyled-button">
-            <img src="assets/imgs/user.png" /></button
-        ></a>
-        <a href="fav.html"
-          ><button class="unstyled-button">
-            <img src="assets/imgs/bookmark.png" /></button
-        ></a>
+        <a href="home.html">
+          <button class="unstyled-button">
+            <img src="assets/imgs/inhome.png" />
+          </button>
+        </a>
+        <a href="profile.html">
+          <button class="unstyled-button">
+            <img src="assets/imgs/user.png" />
+          </button>
+        </a>
+        <a href="fav.html">
+          <button class="unstyled-button">
+            <img src="assets/imgs/bookmark.png" />
+          </button>
+        </a>
       </div>
     </nav>
-    <br /><br /><br />
-    <br />
-    <br />
-
-    <!-- Notifications -->
-    <div class="alert alert-danger d-none" role="alert"></div>
-
-    <div>
-      <div class="container">
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="assets/imgs/plmb.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="col-6 card-body">
-                <h5 class="card-title">Plumber</h5>
-                <p>P800 per Project</p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Last updated 3 mins ago</small
-                  >
-                </p>
-              </div>
-              <div class="col-6 card-body">
-                <a href="fav.html"
-                  ><button class="unstyled-button">
-                    <img src="assets/imgs/bookmark.png" /></button
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="assets/imgs/soldering.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Technician</h5>
-                <p>P350/hr</p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Last updated 3 mins ago</small
-                  >
-                </p>
-              </div>
-
-              <div class="col-6 card-body">
-                <a href="fav.html"
-                  ><button class="unstyled-button">
-                    <img src="assets/imgs/inbookmark.png" /></button
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img
-                src="assets/imgs/panday.jpg"
-                class="img-fluid rounded-start"
-                alt="..."
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">Panday Mason</h5>
-                <p>P1000 / May Vary</p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
-                    >Last updated 3 mins ago</small
-                  >
-                </p>
-              </div>
-
-              <div class="col-6 card-body">
-                <a href="fav.html"
-                  ><button class="unstyled-button">
-                    <img src="assets/imgs/bookmark.png" /></button
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- End Navbar -->
 
     <br /><br />
 
+    <!-- Container -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="shadow col-sm-12 rounded">
+          <!-- Upload Form -->
+          <form id="form_upload">
+            <div class="row">
+              <div class="col-4">
+                <img
+                  class="p-5 rounded-circle"
+                  src="assets/imgs/empty.png"
+                  alt=""
+                />
+              </div>
+              <div class="col-8 container p-5">
+                <!-- Button to Trigger Modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#form_modal"
+                >
+                  Upload Service
+                </button>
+                <br />
+                <h5 class="p-1">Mark Kenth Paran</h5>
+              </div>
+            </div>
+          </form>
+          <!-- End Upload Form -->
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="form_modal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Service Information
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <!-- Item Form -->
+            <form id="form_service">
+              <div class="modal-body">
+                <!-- Service Name Field -->
+                <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="service_name"
+                      id="service_name"
+                      placeholder="Service Name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Hourly Rate Field -->
+                <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <input
+                      class="form-control"
+                      type="number"
+                      name="hourly_rate"
+                      id="hourly_rate"
+                      min="0"
+                      step=".01"
+                      placeholder="Rate"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Description Field -->
+                <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <textarea
+                      class="form-control"
+                      name="description"
+                      id="description"
+                      placeholder="Description"
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+
+                <!-- Image File Field -->
+                <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <input
+                      class="form-control"
+                      type="file"
+                      name="image_path"
+                      accept="image/*"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- Modal Footer -->
+              <div class="modal-footer">
+                <button
+                  id="modal_close"
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  class="btn btn-primary w-25 d-flex align-items-center justify-content-center"
+                  type="submit"
+                >
+                  Upload
+                </button>
+              </div>
+            </form>
+            <!-- End Item Form -->
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Notifications -->
+      <div class="alert alert-success d-none" role="alert"></div>
+      <div class="alert alert-danger d-none" role="alert"></div>
+
+      <!-- Data Display -->
+      <div class="row pb-5" id="get_data"></div>
+
+      <!-- Pagination -->
+      <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination" id="get_pagination"></ul>
+        </nav>
+      </div>
+    </div>
+    <!-- End Container -->
+
+    <!-- Scripts -->
     <script src="./js/capacitor-welcome.js" type="module"></script>
   </body>
 </html>

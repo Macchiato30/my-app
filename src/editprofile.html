@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="/css/css/master.css" />
     <link rel="stylesheet" href="/css/css/home.css" />
 
-    <script type="module" src="./js/system/profile.js"></script>
+    <script type="module" src="./js/system/editprofile.js"></script>
   </head>
+
   <body>
     <nav class="navbar bg-body-tertiary fixed-top container-fluid bg">
       <div class="col-10 container-fluid">
@@ -63,46 +64,29 @@
               alt="..."
             />
           </div>
-          <div class="container-fluid text-center">
-            <form>
-              <div class="mb-3">
-                <label for="formFile" class="form-label"
-                  >Upload Profile Picture</label
-                >
-                <input class="form-control" type="file" id="formFile" />
-              </div>
-            </form>
-          </div>
-          <div class="col-md-8">
+          <div class="container-fluid">
             <div class="card-body">
-              <form>
-                <div class="mb-3">
-                  <label for="servicename" class="form-label"
-                    >Service Name</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="1"
-                  ></textarea>
+              <form id="form_profile">
+                <div class="text-center">
+                  <div class="mb-3">
+                    <label for="upload" class="form-label"
+                      >Upload Profile Picture</label
+                    >
+                    <input
+                      class="form-control"
+                      type="file"
+                      name="image_path"
+                      accept="image/*"
+                    />
+                  </div>
                 </div>
                 <p><b>Mark Kenth Paran</b></p>
                 <div class="mb-3">
-                  <label for="rate" class="form-label">Hourly / Rate</label>
+                  <label for="hourly_rate" class="form-label">Bio</label>
                   <textarea
                     class="form-control"
-                    id="exampleFormControlTextarea1"
+                    id="hourly_rate"
                     rows="1"
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="description" class="form-label"
-                    >Description</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
                   ></textarea>
                 </div>
 
@@ -143,20 +127,6 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-md-8">
-            <div class="card-body">
-              <p><b>RATING</b></p>
-              <ul>
-                <li>4.5 / 5</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <br /><br />
 
     <script src="./js/capacitor-welcome.js" type="module"></script>
