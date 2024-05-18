@@ -18,11 +18,12 @@
     <nav class="navbar bg-body-tertiary fixed-top container-fluid bg">
       <div class="col-10 container-fluid">
         <!-- Search Form -->
-        <form class="col d-flex" role="search">
+        <form id="search_form" class="col d-flex" role="search">
           <input
             class="form-control me-2"
-            type="search"
+            type="text"
             placeholder="Search"
+            name="keyword"
             aria-label="Search"
           />
           <button class="unstyled-button p-1" id="srch" type="submit">
@@ -58,41 +59,34 @@
     <!-- End Navbar -->
 
     <br /><br />
+    <br />
+    <br />
+
+    <!-- Notifications -->
+    <div class="container">
+      <div class="alert alert-success d-none" role="alert"></div>
+      <div class="alert alert-danger d-none" role="alert"></div>
+    </div>
 
     <!-- Container -->
-    <div class="container mt-5">
-      <div class="row">
-        <div class="shadow col-sm-12 rounded">
+    <div class="container">
+      <div>
+        <div>
           <!-- Upload Form -->
           <form id="form_upload">
-            <div class="row">
-              <div class="col-4">
-                <img
-                  class="p-5 rounded-circle"
-                  src="assets/imgs/empty.png"
-                  alt=""
-                />
-              </div>
-              <div class="col-8 container p-5">
-                <!-- Button to Trigger Modal -->
-                <button
-                  type="button"
-                  class="btn btn-primary w-100"
-                  data-bs-toggle="modal"
-                  data-bs-target="#form_modal"
-                >
-                  Upload Service
-                </button>
-                <br />
-                <h5 class="p-1">Mark Kenth Paran</h5>
-              </div>
+            <div>
+              <!-- Button to Trigger Modal -->
+              <a
+                id="modal_show"
+                data-bs-toggle="modal"
+                data-bs-target="#form_modal"
+              >
+              </a>
             </div>
           </form>
           <!-- End Upload Form -->
         </div>
       </div>
-
-      <hr />
 
       <!-- Modal -->
       <div
@@ -117,94 +111,62 @@
                 aria-label="Close"
               ></button>
             </div>
-            <!-- Item Form -->
-            <form id="form_service">
-              <div class="modal-body">
-                <!-- Service Name Field -->
+            <div class="modal-body">
+              <!-- Loading Spinner -->
+              <div id="loading_spinner" class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p>Loading...</p>
+              </div>
+              <!-- Display Service Details -->
+              <div id="service_details" style="display: none">
+                <!-- Service Name -->
                 <div class="row mb-3">
                   <div class="col-sm-12">
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="service_name"
-                      id="service_name"
-                      placeholder="Service Name"
-                      required
-                    />
+                    <h5 id="service_name_display"></h5>
                   </div>
                 </div>
-
-                <!-- Hourly Rate Field -->
+                <!-- Hourly Rate -->
                 <div class="row mb-3">
                   <div class="col-sm-12">
-                    <input
-                      class="form-control"
-                      type="number"
-                      name="hourly_rate"
-                      id="hourly_rate"
-                      min="0"
-                      step=".01"
-                      placeholder="Rate"
-                      required
-                    />
+                    <p id="hourly_rate_display"></p>
                   </div>
                 </div>
-
-                <!-- Description Field -->
+                <!-- Description -->
                 <div class="row mb-3">
                   <div class="col-sm-12">
-                    <textarea
-                      class="form-control"
-                      name="description"
-                      id="description"
-                      placeholder="Description"
-                      required
-                    ></textarea>
+                    <p id="description_display"></p>
                   </div>
                 </div>
-
-                <!-- Image File Field -->
+                <!-- Image -->
                 <div class="row mb-3">
                   <div class="col-sm-12">
-                    <input
-                      class="form-control"
-                      type="file"
-                      name="image_path"
-                      accept="image/*"
+                    <img
+                      id="image_display"
+                      src=""
+                      alt="Service Image"
+                      class="img-fluid"
                     />
                   </div>
                 </div>
               </div>
-              <!-- Modal Footer -->
-              <div class="modal-footer">
-                <button
-                  id="modal_close"
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  class="btn btn-primary w-25 d-flex align-items-center justify-content-center"
-                  type="submit"
-                >
-                  Upload
-                </button>
-              </div>
-            </form>
-            <!-- End Item Form -->
+            </div>
+            <div class="modal-footer">
+              <button
+                id="modal_close"
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
       <!-- End Modal -->
-
-      <!-- Notifications -->
-      <div class="alert alert-success d-none" role="alert"></div>
-      <div class="alert alert-danger d-none" role="alert"></div>
-
-      <!-- Data Display -->
-      <div class="row pb-5" id="get_data"></div>
 
       <!-- Pagination -->
       <div class="d-flex justify-content-center">
@@ -212,6 +174,16 @@
           <ul class="pagination" id="get_pagination"></ul>
         </nav>
       </div>
+    </div>
+
+    <!-- Data Display -->
+    <div class="container" id="get_data"></div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination" id="get_pagination"></ul>
+      </nav>
     </div>
     <!-- End Container -->
 

@@ -12,126 +12,161 @@ getDatas();
 const btn_signout = document.getElementById("btn_signout");
 btn_signout.onclick = doLogout;
 
-const form_service = document.getElementById("form_service");
+//search form funcionality
+const search_form = document.getElementById("search_form");
 
-form_service.onsubmit = async (e) => {
+search_form.onsubmit = async (e) => {
   e.preventDefault();
 
-  // Get all values from input, textarea under forms
-  const formData = new FormData(form_service);
+  const formData = new FormData(search_form);
 
-  // Input Data into supabase
-  const { data, error } = await supabase
-    .from("service")
-    .insert([
-      {
-        service_name: formData.get("service_name"),
-        hourly_rate: formData.get("hourly_rate"),
-        description: formData.get("description"),
-        image_path: formData.get("image_path"),
-      },
-    ])
-    .select();
-
-  if (error == null) {
-    // Show Notification
-    successNotification("Service Successfully Uploaded!</a>", 15);
-
-    // Modal close
-    document.getElementById("modal_close").click();
-    // Reload datas
-    getDatas();
-  } else {
-    errorNotification("Something went wrong. Service not uploaded!", 10);
-    console.log(error);
-  }
-
-  // Reset Form
-  form_service.reset();
-
-  // Enable Submit Button
-  document.querySelector(
-    "#form_service button[type='submit']"
-  ).disabled = false;
-  document.querySelector(
-    "#form_service button[type='submit']"
-  ).innerHTML = `Upload`;
+  getDatas(formData.get("keyword"));
 };
 
-async function getDatas() {
+async function getDatas(keyword = "") {
+  // search or filtering for search
+  let { data: services, error } = await supabase
+    .from("service")
+    .select("*")
+    //.ilike("service_name", "%" + keyword + "%");
+    .or(
+      "service_name.ilike.%" +
+        keyword +
+        "%, description.ilike.%" +
+        keyword +
+        "%"
+    );
   // Get all rows of tables
-  let { data: services, error } = await supabase.from("service").select("*");
 
   let container = "";
   // Get Each service and interpolate with HTML elements
   services.forEach((service) => {
-    container += `<div class="col-sm-12">
-    <div class="card w-100 mt-3" data-id="${service.service_id}">
+    container += `
+    <div>
+        <div class="col-sm-12">
+            <div class="card w-100 mt-3" data-id="${service.id}">
+                    <div class="row">
+                        <a href="#" class="btn-show card-link" data-id="${service.id}">
+                            <div class="col-sm-4">
+                                <img src="${service.image_path}" width="100%" height="225px">
+                            </div>
+                        </a>
+                        <div class="col-sm-8">
+                            <div class="card-body">
 
-        <div class="row">
-            <div class="col-sm-4">
-                <img src="service.image_path
-                }" width="100%" height="225px">
-            </div>
+                                <div class="dropdown float-end">
+                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item btn_save" href="#" data-id="${service.id}" data-service-name="${service.service_name}" data-hourly-rate="${service.hourly_rate}" data-description="${service.description}" data-image="${service.image_path}">Save</a>
+                                        </li>
+                                    </ul>
+                                </div>
 
-            <div class="col-sm-8">
-                <div class="card-body">
-            
-                    <div class="dropdown float-end">
-                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="#" id="btn_edit" data-id="${service.service_id}">Save</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" id="btn_save" data-id="${service.service_id}">Share</a>
-                            </li>
-                        </ul>
+                                <h5 class="card-title">${service.service_name}</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">
+                                    <p>Post By: ${service.user_id}</p>
+                                    <p>PHP ${service.hourly_rate}</p>
+                                </h6>
+                                <p class="card-text">${service.description}</p>
+
+                            </div>
+                        </div>
                     </div>
-                
-                    <h5 class="card-title">${service.service_name}</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">
-                        <small>${service.hourly_rate}</small>
-                    </h6>
-                    <p class="card-text">${service.description}</p>
-
-                </div>
             </div>
         </div>
-    
-    </div>
-</div>`;
+    </div>`;
   });
 
   // Assign container elements to be displayed
   document.getElementById("get_data").innerHTML = container;
 
-  // Assign click event on save Btns
-  document.querySelectorAll("#btn_save").forEach((service) => {
-    service.addEventListener("click", saveAction);
+  // Assign click event on show service buttons
+  document.querySelectorAll(".btn-show").forEach((element) => {
+    element.addEventListener("click", showService);
   });
+
+  // Event delegation for save button click
+  document
+    .getElementById("get_data")
+    .addEventListener("click", function (event) {
+      if (event.target.classList.contains("btn_save")) {
+        saveAction(event);
+      }
+    });
 }
 
-// save functionality
-
 const saveAction = async (e) => {
-  // Get service ID
-  const service_id = e.target.getAttribute("data-id");
+  const id = e.target.getAttribute("data-id");
+  const service_name = e.target.getAttribute("data-service-name");
+  const hourly_rate = e.target.getAttribute("data-hourly-rate");
+  const description = e.target.getAttribute("data-description");
+  const image_path = e.target.getAttribute("data-image");
 
-  // Get service data
-  let { data: services, error } = await supabase
+  const { data, error } = await supabase
+    .from("save")
+    .insert([
+      {
+        id: id,
+        service_name: service_name,
+        hourly_rate: hourly_rate,
+        description: description,
+        image_path: image_path,
+      },
+    ])
+    .select();
+
+  if (error == null) {
+    // Show success notification
+    successNotification("Service Successfully Saved!", 15);
+
+    // Modal close
+    document.getElementById("modal_close").click();
+
+    // Reload datas
+    getDatas();
+  } else {
+    // Show error notification
+    errorNotification("Service already saved!", 10);
+    console.log(error);
+  }
+};
+
+const showService = async (e) => {
+  e.preventDefault();
+  const id = e.currentTarget.getAttribute("data-id");
+
+  // Show loading spinner
+  document.getElementById("loading_spinner").style.display = "block";
+  document.getElementById("service_details").style.display = "none";
+
+  // supabase show by id
+  let { data: service, error } = await supabase
     .from("service")
     .select("*")
-    .eq("service_id", service_id);
+    .eq("id", id);
 
-  // Get service data
-  let service = services[0];
+  if (error == null) {
+    // Populate service details
+    document.getElementById("service_name_display").textContent =
+      service[0].service_name;
+    document.getElementById(
+      "hourly_rate_display"
+    ).textContent = `PHP ${service[0].hourly_rate}`;
+    document.getElementById("description_display").textContent =
+      service[0].description;
+    document.getElementById("image_display").src = service[0].image_path;
 
-  // Add the service to saved services in local storage
-  const savedServices = JSON.parse(localStorage.getItem("savedServices")) || [];
-  savedServices.push(service);
-  localStorage.setItem("savedServices", JSON.stringify(savedServices));
+    // Hide loading spinner and show service details
+    document.getElementById("loading_spinner").style.display = "none";
+    document.getElementById("service_details").style.display = "block";
+  } else {
+    // Show error notification
+    errorNotification("Something went wrong. Service cannot be showed!", 10);
+    console.log(error);
+  }
 
-  // Show Notification
-  successNotification("Service Successfully Saved!", 15);
+  // Show the modal
+  const modalShowButton = document.getElementById("modal_show");
+  modalShowButton.click();
 };
